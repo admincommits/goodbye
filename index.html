@@ -1,1 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Last Message</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+font-family:Arial,sans-serif;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#0f172a,#1e3a8a,#312e81);
+overflow:hidden;
+color:#fff;
+}
+body:before{
+content:"";
+position:absolute;inset:0;
+background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.15),transparent 35%),
+radial-gradient(circle at 80% 70%,rgba(255,255,255,.08),transparent 30%);
+animation:float 10s infinite alternate;
+}
+@keyframes float{from{transform:translateY(-10px)}to{transform:translateY(10px)}}
+.card{
+position:relative;
+z-index:1;
+width:min(90%,760px);
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(12px);
+padding:28px;
+border-radius:18px;
+box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+h1{text-align:center;margin-bottom:16px}
+input{
+width:100%;padding:12px;border:none;border-radius:10px;
+margin:10px 0;font-size:16px;
+}
+button{
+width:100%;padding:12px;border:none;border-radius:10px;
+background:#60a5fa;color:white;font-size:16px;cursor:pointer;
+}
+button:hover{background:#3b82f6}
+#msg{display:none;white-space:pre-wrap;line-height:1.7;font-size:16px}
+small{display:block;text-align:center;margin-top:18px;opacity:.75}
+.cat{font-size:28px;text-align:right;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="card">
+<div id="lock">
+<h1>🔒 One Last Message</h1>
+<p style="text-align:center;opacity:.8">Enter the password to continue.</p>
+<input type="password" id="pw" placeholder="Password">
+<button onclick="unlock()">Unlock</button>
+<p id="err" style="color:#ffb4b4;text-align:center;margin-top:10px"></p>
+</div>
 
+<div id="msg">
+<h1>🌙 Hey Agraja</h1>
+hey 
+
+Hey agraja
+
+I know this is kinda random, but I just wanted to say this before I disappear.
+
+I'm deleting this account fr this time. things got way more messed up behind the scenes than I ever expected, and honestly, I don't have the energy to deal with all of it anymore. One thing happened involving someone close to you that kinda became the last straw. I'm not gonna say who or what because I don't wanna start any drama. I'd rather just end it here and move on.
+
+And yea.. Im sorry for blocking you. At that time i thought it was the easiest way to avoid everything, but looking back, it wasn't fair to you. You prolly would have a lot questions about my disappearance, My bad.
+Also, I would like to thank for having funny convos and all the gossips we shared including META AI(count 100)
+there is the one sticker i still us. and that cat looks cool.
+
+I just didn't wanna leave without saying anything. So yeah, after this, this account's gone for good.
+
+No hate or anything from my side. I genuinely hope everything goes well for you. Take care :)
+
+<div class="cat">🐈</div>
+<small>"Some conversations stay funny forever."</small>
+</div>
+</div>
+
+<script>
+const PASSWORD="100";
+function unlock(){
+ let p=document.getElementById("pw").value;
+ if(p===PASSWORD){
+   document.getElementById("lock").style.display="none";
+   document.getElementById("msg").style.display="block";
+ }else{
+   document.getElementById("err").innerText="Wrong password.";
+ }
+}
+</script>
+</body>
+</html>
