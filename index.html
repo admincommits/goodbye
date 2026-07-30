@@ -4,64 +4,79 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>One Last Message</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
-font-family:Arial,sans-serif;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#0f172a,#1e3a8a,#312e81);
-overflow:hidden;
-color:#fff;
+font-family:Poppins,sans-serif;
+height:100vh;overflow:hidden;color:#fff;
+display:flex;justify-content:center;align-items:center;
+background:linear-gradient(-45deg,#09111f,#172554,#312e81,#111827);
+background-size:400% 400%;
+animation:bg 16s ease infinite;
 }
-body:before{
-content:"";
-position:absolute;inset:0;
-background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.15),transparent 35%),
-radial-gradient(circle at 80% 70%,rgba(255,255,255,.08),transparent 30%);
-animation:float 10s infinite alternate;
+@keyframes bg{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}
+.stars,.stars:before,.stars:after{
+content:"";position:absolute;inset:0;
+background-image:radial-gradient(white 1px,transparent 1px);
+background-size:90px 90px;
+opacity:.35;
+animation:float 18s linear infinite;
 }
-@keyframes float{from{transform:translateY(-10px)}to{transform:translateY(10px)}}
+.stars:before{transform:scale(1.2)}
+.stars:after{transform:scale(.8)}
+@keyframes float{from{transform:translateY(0)}to{transform:translateY(-80px)}}
 .card{
-position:relative;
-z-index:1;
-width:min(90%,760px);
+position:relative;z-index:2;
+width:min(92%,820px);
 background:rgba(255,255,255,.08);
-backdrop-filter:blur(12px);
-padding:28px;
-border-radius:18px;
-box-shadow:0 10px 30px rgba(0,0,0,.35);
+backdrop-filter:blur(18px);
+border:1px solid rgba(255,255,255,.15);
+border-radius:24px;
+padding:35px;
+box-shadow:0 25px 60px rgba(0,0,0,.45);
+animation:fade .8s;
 }
-h1{text-align:center;margin-bottom:16px}
+@keyframes fade{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:none}}
+h1{text-align:center;margin-bottom:12px}
+.sub{text-align:center;opacity:.8;margin-bottom:18px}
 input{
-width:100%;padding:12px;border:none;border-radius:10px;
-margin:10px 0;font-size:16px;
+width:100%;padding:14px;border:none;border-radius:12px;
+font-size:16px;outline:none;margin:14px 0;
 }
 button{
-width:100%;padding:12px;border:none;border-radius:10px;
-background:#60a5fa;color:white;font-size:16px;cursor:pointer;
+width:100%;padding:14px;border:none;border-radius:12px;
+background:#60a5fa;color:#fff;font-size:16px;
+cursor:pointer;transition:.25s;
 }
-button:hover{background:#3b82f6}
-#msg{display:none;white-space:pre-wrap;line-height:1.7;font-size:16px}
-small{display:block;text-align:center;margin-top:18px;opacity:.75}
-.cat{font-size:28px;text-align:right;margin-top:10px}
+button:hover{transform:scale(1.02);background:#3b82f6}
+#error{text-align:center;color:#ffb4b4;height:22px;margin-top:8px}
+#message{display:none;white-space:pre-wrap;line-height:1.8;font-size:15px}
+.quote{text-align:center;margin-top:25px;opacity:.75;font-style:italic}
+.cat{font-size:30px;text-align:right;margin-top:18px}
+.corner{
+position:absolute;top:15px;right:18px;font-size:13px;opacity:.5}
 </style>
 </head>
 <body>
+<div class="stars"></div>
+
 <div class="card">
+<div class="corner">🌙 Some conversations stay.</div>
+
 <div id="lock">
 <h1>🔒 One Last Message</h1>
-<p style="text-align:center;opacity:.8">Enter the password to continue.</p>
-<input type="password" id="pw" placeholder="Password">
+<div class="sub">Enter the password to unlock.</div>
+
+<input id="pw" type="password" placeholder="Password">
 <button onclick="unlock()">Unlock</button>
-<p id="err" style="color:#ffb4b4;text-align:center;margin-top:10px"></p>
+<div id="error"></div>
 </div>
 
-<div id="msg">
-<h1>🌙 Hey Agraja</h1>
-hey 
+<div id="message">
+<h1>Hey Agraja</h1>
+
+hey
 
 Hey agraja
 
@@ -70,6 +85,7 @@ I know this is kinda random, but I just wanted to say this before I disappear.
 I'm deleting this account fr this time. things got way more messed up behind the scenes than I ever expected, and honestly, I don't have the energy to deal with all of it anymore. One thing happened involving someone close to you that kinda became the last straw. I'm not gonna say who or what because I don't wanna start any drama. I'd rather just end it here and move on.
 
 And yea.. Im sorry for blocking you. At that time i thought it was the easiest way to avoid everything, but looking back, it wasn't fair to you. You prolly would have a lot questions about my disappearance, My bad.
+
 Also, I would like to thank for having funny convos and all the gossips we shared including META AI(count 100)
 there is the one sticker i still us. and that cat looks cool.
 
@@ -78,21 +94,39 @@ I just didn't wanna leave without saying anything. So yeah, after this, this acc
 No hate or anything from my side. I genuinely hope everything goes well for you. Take care :)
 
 <div class="cat">🐈</div>
-<small>"Some conversations stay funny forever."</small>
+
+<div class="quote">"Some conversations don't need a goodbye. They just deserve to be remembered."</div>
 </div>
 </div>
 
 <script>
 const PASSWORD="100";
+
 function unlock(){
- let p=document.getElementById("pw").value;
+ const p=document.getElementById("pw").value;
  if(p===PASSWORD){
-   document.getElementById("lock").style.display="none";
-   document.getElementById("msg").style.display="block";
+   const lock=document.getElementById("lock");
+   lock.style.transition="all .6s";
+   lock.style.opacity="0";
+   lock.style.transform="scale(.96)";
+   setTimeout(()=>{
+      lock.style.display="none";
+      const m=document.getElementById("message");
+      m.style.display="block";
+      m.animate([
+        {opacity:0,transform:"translateY(15px)"},
+        {opacity:1,transform:"translateY(0)"}
+      ],{duration:900,fill:"forwards"});
+   },600);
  }else{
-   document.getElementById("err").innerText="Wrong password.";
+   document.getElementById("error").textContent="Wrong password.";
  }
 }
+
+document.getElementById("pw").addEventListener("keydown",e=>{
+ if(e.key==="Enter") unlock();
+});
 </script>
+
 </body>
 </html>
